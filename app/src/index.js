@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
+
 import { Admin } from './pages/Admin';
 
 
@@ -18,7 +19,7 @@ root.render(
         {/* Main layout */}
         <Route path="/" element={<Layout />}>
           {/* Admin page as a nested route */}
-          <Route path="admin" element={<Admin />} />
+          <Route path="hii" element={<Admin />} />
         </Route>
 
       </Routes>
