@@ -4,7 +4,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { Admin } from './pages/admin';
+
+import { Admin } from './pages/Admin';
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
