@@ -20,7 +20,7 @@ root.render(
       <Routes>
 
         {/* Main layout */}
-        <Route path="/layout" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           {/* Admin page as a nested route */}
           <Route path="/admin" element={<Admin />} />
           <Route path="/user" element={<User />} />
