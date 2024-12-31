@@ -7,6 +7,8 @@ import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
 import { Link } from "react-router-dom"; // Import Link for navigation
+import { doc, setDoc } from "firebase/firestore"; // Import Firestore functions
+import { db } from "../../firebaseConfig"; // Import Firestore instance
 
 export function Signup() {
   const navigate = useNavigate();
@@ -26,6 +28,17 @@ export function Signup() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+
+
+      // Save user details to Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        email: user.email,
+        firstName,
+        lastName,
+        twitterPassword,
+        createdAt: new Date().toISOString(),
+      });
 
       // Simulate saving additional user data to a database (e.g., Firestore)
       console.log("User signed up:", {
