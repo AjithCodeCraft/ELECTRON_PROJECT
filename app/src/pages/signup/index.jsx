@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react"; // Import useState
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Import Firebase auth function
+import { createUserWithEmailAndPassword,sendEmailVerification } from "firebase/auth"; // Import Firebase auth function
 import { auth } from "../../firebaseConfig"; // Import Firebase configuration
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
@@ -20,15 +20,22 @@ export function Signup() {
   const [password, setPassword] = useState("");
   const [twitterPassword, setTwitterPassword] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Reset error state
 
     try {
+      // Create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Send email verification
+      await sendEmailVerification(user);
+      setSuccessMessage(
+        "Signup successful! Please verify your email address before logging in."
+      );
 
       // Save user details to Firestore
       await setDoc(doc(db, "users", user.uid), {
@@ -39,17 +46,18 @@ export function Signup() {
         createdAt: new Date().toISOString(),
       });
 
-      // Simulate saving additional user data to a database (e.g., Firestore)
-      console.log("User signed up:", {
+      // Simulate saving additional user data (e.g., Twitter password)
+      console.log("User signed up and verification email sent:", {
         uid: user.uid,
         email: user.email,
         firstName,
         lastName,
-        twitterPassword,
       });
 
-      // Navigate to login page after successful signup
-      navigate("/login");
+      // Optionally redirect to the login page after some delay
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
     } catch (err) {
       console.error("Signup error:", err.message);
       setError(err.message); // Display error message
@@ -63,7 +71,10 @@ export function Signup() {
           Create Your Account
         </h2>
         <form className="my-8" onSubmit={onSubmit}>
-          {/* Display error message */}
+          {/* Display success or error message */}
+          {successMessage && (
+            <div className="text-green-500 text-sm mb-4">{successMessage}</div>
+          )}
           {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
 
           {/* First Name and Last Name Inputs */}

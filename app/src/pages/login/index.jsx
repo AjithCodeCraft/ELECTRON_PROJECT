@@ -24,6 +24,12 @@ export function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Check if the email is verified
+      if (!user.emailVerified) {
+        setError("Please verify your email address before logging in.");
+        return;
+      }
+
       console.log("Login successful:", user);
       navigate("/admin"); // Redirect to the admin dashboard
     } catch (err) {
