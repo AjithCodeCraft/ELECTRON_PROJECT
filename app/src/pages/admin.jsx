@@ -7,7 +7,7 @@ export const Admin = () => {
 
     return ( <div>
 
-        <p>This is Admin Page</p>
+        <p className="text-3xl font-bold underline">This is Admin Page</p>
 
         <Outlet/> 
     </div>
