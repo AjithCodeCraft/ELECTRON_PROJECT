@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 
 import { Admin } from './pages/admin';
+import { User } from './pages/user'
 
 
 
@@ -20,6 +21,7 @@ root.render(
         <Route path="/" element={<Layout />}>
           {/* Admin page as a nested route */}
           <Route path="hii" element={<Admin />} />
+          <Route path="/user" element={<User />} />
         </Route>
 
       </Routes>

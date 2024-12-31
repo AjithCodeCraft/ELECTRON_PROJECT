@@ -5,11 +5,17 @@ import { Outlet } from "react-router-dom"
 
 export const Layout = () => {
 
-    return ( <div>
+    return (<div>
 
         <p>This is our layout</p>
 
-        <Outlet/>
+        <ul>
+
+            <li><a href="/">Admin</a></li>
+            <li><a href="/user">User</a></li>
+        </ul>
+
+        <Outlet />
     </div>
     );
 };
