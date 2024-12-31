@@ -9,7 +9,7 @@ export const Admin = () => {
 
         <p>This is Admin Page</p>
 
-        <Outlet/>
+        <Outlet/> 
     </div>
     );
 };
