@@ -55,7 +55,7 @@ export function Signup() {
             to="/login"
             className="text-blue-500 hover:text-blue-700 transition"
           >
-            Signin
+            Login
           </Link>
         </p>
       </div>
