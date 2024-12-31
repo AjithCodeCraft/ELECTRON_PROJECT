@@ -7,13 +7,13 @@ export const Layout = () => {
 
     return (<div>
 
-        <p>This is our layout</p>
+        {/* <p>This is our layout</p>
 
         <ul>
 
-            <li><a href="/">Admin</a></li>
+            <li><a href="/admin">Admin</a></li>
             <li><a href="/user">User</a></li>
-        </ul>
+        </ul> */}
 
         <Outlet />
     </div>

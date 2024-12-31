@@ -7,6 +7,8 @@ import { Layout } from './components/Layout';
 
 import { Admin } from './pages/admin';
 import { User } from './pages/user'
+import Login from './pages/login';
+import { Signup } from './pages/signup';
 
 
 
@@ -20,8 +22,11 @@ root.render(
         {/* Main layout */}
         <Route path="/" element={<Layout />}>
           {/* Admin page as a nested route */}
-          <Route path="hii" element={<Admin />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/user" element={<User />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          
         </Route>
 
       </Routes>
