@@ -36,7 +36,6 @@ export function Signup() {
         email: user.email,
         firstName,
         lastName,
-        twitterPassword,
         createdAt: new Date().toISOString(),
       });
 
