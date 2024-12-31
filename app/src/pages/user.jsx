@@ -7,7 +7,7 @@ export const User = () => {
 
     return (<div>
 
-        <h1>Welcome User</h1>
+        <h1 className="text-1xl font-bold underline">Welcome User</h1>
 
         <h2>Register Here</h2>
 
@@ -24,7 +24,7 @@ export const User = () => {
 
                 </div>  
             <div> 
-                <button>Submit</button>
+                <button className="text-3xl font-bold underline">Submit</button>
             </div>
                 
         </form>
