@@ -3,6 +3,7 @@ import React from "react";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 export function Signup() {
   const handleSubmit = (e) => {
@@ -48,6 +49,15 @@ export function Signup() {
             <BottomGradient />
           </button>
         </form>
+        <p className="text-center text-sm text-neutral-600 dark:text-neutral-400 mt-4">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-blue-500 hover:text-blue-700 transition"
+          >
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
