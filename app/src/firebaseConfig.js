@@ -1,22 +1,22 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
 
 // Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyDCqZjCskD0-t0Z5cyD2YxFUYgtCNtroZ8",
-  authDomain: "to-do-639c8.firebaseapp.com",
-  projectId: "to-do-639c8",
-  storageBucket: "to-do-639c8.firebasestorage.app",
-  messagingSenderId: "281015737918",
-  appId: "1:281015737918:web:239ed56b3023389d2a3b6f",
-  measurementId: "G-2W8E9ZTL7V"
+  apiKey: "AIzaSyD0jOEmQ0axLG8PiUUneqdKCKeUIZlCMk4",
+  authDomain: "react-226f4.firebaseapp.com",
+  projectId: "react-226f4",
+  storageBucket: "react-226f4.firebasestorage.app",
+  messagingSenderId: "349553089807",
+  appId: "1:349553089807:web:49fdaa86b2c9b91c67727a",
+  measurementId: "G-04WX3ZXR5P"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 
 
 // Initialize Firebase Authentication and get a reference to the service
