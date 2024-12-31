@@ -3,15 +3,26 @@ import React from "react";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export function Login() {
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
   };
+  const goBack = () => {
+    navigate('/'); // Navigate back to the previous page
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white dark:bg-black">
+      <button
+          onClick={goBack}
+          className="fixed top-4 left-4 bg-blue-500 text-white p-2 rounded-m"
+        >
+          Go Back
+        </button>
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
         <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
           Welcome to Aceternity
