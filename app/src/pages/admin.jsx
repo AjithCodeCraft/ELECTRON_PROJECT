@@ -1,15 +1,15 @@
 import React from "react"
-import { Outlet } from "react-router-dom"
+// import { Outlet } from "react-router-dom"
+import { SidebarDemo } from "../components/navbar";
 
 
 
 export const Admin = () => {
 
-    return ( <div>
-
-        <p className="text-3xl font-bold underline">This is Admin Page</p>
-
-        <Outlet/> 
-    </div>
+    return ( <div style={{ marginBottom: "0", paddingBottom: "0" }}>
+        <SidebarDemo />
+      </div>
+      
+      
     );
 };
