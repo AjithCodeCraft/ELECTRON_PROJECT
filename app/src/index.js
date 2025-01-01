@@ -9,6 +9,7 @@ import { Admin } from './pages/admin';
 import { User } from './pages/user';
 import { Login } from './pages/login';
 import { Signup } from './pages/signup';
+import { EmailVerification } from './components/email_verification';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -22,6 +23,7 @@ root.render(
         <Route path="/admin" element={<Admin />} />
         <Route path="/user" element={<User />} />
         <Route path="/layout" element={<Layout />} />
+        <Route path="/email-verification" element={<EmailVerification />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
