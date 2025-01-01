@@ -1,14 +1,17 @@
 "use client";
-import React, { useState } from "react"; // Import useState
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { createUserWithEmailAndPassword,sendEmailVerification } from "firebase/auth"; // Import Firebase auth function
-import { auth } from "../../firebaseConfig"; // Import Firebase configuration
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
-import { Link } from "react-router-dom"; // Import Link for navigation
-import { doc, setDoc } from "firebase/firestore"; // Import Firestore functions
-import { db } from "../../firebaseConfig"; // Import Firestore instance
+import { Link } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
 
 export function Signup() {
   const navigate = useNavigate();
@@ -18,13 +21,46 @@ export function Signup() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [twitterPassword, setTwitterPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState(""); // For password strength
+  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // For live confirm password validation
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  // Password strength checker
+  const checkPasswordStrength = (password) => {
+    if (password.length < 6) return "Weak";
+    const strongPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
+    const mediumPattern = /^(?=.*[A-Z])|(?=.*[0-9])|(?=.*[!@#$%^&*])/;
+    if (strongPattern.test(password)) return "Strong";
+    if (mediumPattern.test(password)) return "Medium";
+    return "Weak";
+  };
+
+  const onPasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setPasswordStrength(checkPasswordStrength(value)); // Update password strength
+  };
+
+  const onConfirmPasswordChange = (e) => {
+    const value = e.target.value;
+    setConfirmPassword(value);
+    if (password !== value) {
+      setConfirmPasswordError("Passwords do not match.");
+    } else {
+      setConfirmPasswordError(""); // Clear error if passwords match
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Reset error state
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
 
     try {
       // Create a new user with email and password
@@ -46,7 +82,6 @@ export function Signup() {
         createdAt: new Date().toISOString(),
       });
 
-      // Simulate saving additional user data (e.g., Twitter password)
       console.log("User signed up and verification email sent:", {
         uid: user.uid,
         email: user.email,
@@ -54,18 +89,26 @@ export function Signup() {
         lastName,
       });
 
-      // Optionally redirect to the login page after some delay
-      setTimeout(() => {
-        navigate("/login");
-      }, 5000);
+      // Redirect to the verification page
+      navigate("/email-verification");
     } catch (err) {
       console.error("Signup error:", err.message);
-      setError(err.message); // Display error message
+
+      // Map Firebase error codes to user-friendly messages
+      if (err.code === "auth/email-already-in-use") {
+        setError("User already registered with this email.");
+      } else if (err.code === "auth/invalid-email") {
+        setError("Invalid email address.");
+      } else if (err.code === "auth/weak-password") {
+        setError("Password is too weak. Please use at least 6 characters.");
+      } else {
+        setError("Signup failed. Please try again later.");
+      }
     }
   };
 
   return (
-    <div className=" flex items-center justify-center min-h-svh bg-white dark:bg-black">
+    <div className="flex items-center justify-center min-h-svh bg-white dark:bg-black">
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
         <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
           Create Your Account
@@ -124,21 +167,38 @@ export function Signup() {
               placeholder="••••••••"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)} // Update password state
+              onChange={onPasswordChange} // Live password strength validation
               required
             />
+            {password && (
+              <div
+                className={`text-sm mt-1 ${
+                  passwordStrength === "Strong"
+                    ? "text-green-500"
+                    : passwordStrength === "Medium"
+                    ? "text-yellow-500"
+                    : "text-red-500"
+                }`}
+              >
+                Password Strength: {passwordStrength}
+              </div>
+            )}
           </LabelInputContainer>
 
-          {/* Twitter Password Input */}
+          {/* Confirm Password Input */}
           <LabelInputContainer className="mb-8">
-            <Label htmlFor="twitterpassword">Your Twitter Password</Label>
+            <Label htmlFor="confirmpassword">Confirm Password</Label>
             <Input
-              id="twitterpassword"
+              id="confirmpassword"
               placeholder="••••••••"
               type="password"
-              value={twitterPassword}
-              onChange={(e) => setTwitterPassword(e.target.value)} // Update twitter password state
+              value={confirmPassword}
+              onChange={onConfirmPasswordChange} // Live confirm password validation
+              required
             />
+            {confirmPasswordError && (
+              <div className="text-red-500 text-sm mt-1">{confirmPasswordError}</div>
+            )}
           </LabelInputContainer>
 
           {/* Signup Button */}
