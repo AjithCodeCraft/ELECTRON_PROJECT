@@ -3,8 +3,10 @@
 Foobar is a Web/Desktop Application for Making a simple pdf(books) to AudioBook with specific Featurs
 
 ## Installation
+```bash
+git clone https://github.com/AjithCodeCraft/ELECTRON_PROJECT.git
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+```
 
 ```bash
 npm install
@@ -12,8 +14,7 @@ npm install
 
 ## Usage
 
-```javascript
-run 
+```Run ReactApp
 npm run dev:watch     // for electron app
 npm start             // for react app
 
