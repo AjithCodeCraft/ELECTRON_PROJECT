@@ -1,6 +1,6 @@
-# Foobar
+# AudioCooker
 
-Foobar is a Python library for dealing with word pluralization.
+Foobar is a Web/Desktop Application for Making a simple pdf(books) to AudioBook with specific Featurs
 
 ## Installation
 
