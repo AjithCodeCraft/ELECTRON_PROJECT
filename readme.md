@@ -1,5 +1,5 @@
-# AudioCooker(
-https://electron-project.vercel.app)
+# AudioCooker
+https://electron-project.vercel.app
 Foobar is a Web/Desktop Application for Making a simple pdf(books) to AudioBook with specific Featurs
 
 ## Installation
